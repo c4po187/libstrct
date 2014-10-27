@@ -66,13 +66,6 @@
   */
  
  namespace libstrct {
-	
-	/********************************************************************************
-	 * TODO:
-	 * 
-	 * + slice function, nowhere in the C++ language is their one (which is insane)
-	 *
-	 ********************************************************************************/
 
 	 /*
 	 * Internal namespace for functions not to be called by the user

@@ -1,21 +1,21 @@
 /*********************************************
- *                                           *
- * STRING COMMON TASKS LIBRARY (libstrct)    *
- *											 *
+ *                                           
+ * STRING COMMON TASKS LIBRARY (libstrct)    
+ *											 
  *********************************************
- *											 *
- * VERSION : 1.0							 *
- * AUTHOR  : Rici Underwood					 *
- * DATE    : 2014							 *
- * LICENSE : GNU GPL v3						 *
- * EMAIL   : c4po187@gmail.com				 *
- *											 *
+ *											 
+ * VERSION : 1.0							 
+ * AUTHOR  : Rici Underwood					 
+ * DATE    : 2014							 
+ * LICENSE : GNU GPL v3						 
+ * EMAIL   : c4po187@gmail.com				 
+ *											 
  *********************************************
- *											 *
- * Please do not hesitate to report any		 *
- * bugs to the specified email address		 *
- * above, thank you.						 *
- *											 *
+ *											 
+ * Please do not hesitate to report any		 
+ * bugs to the specified email address		 
+ * above, thank you.						 
+ *											 
  *********************************************/
 
 /*

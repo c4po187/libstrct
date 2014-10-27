@@ -83,10 +83,10 @@
 	 * Returns the original string, but with every word starting with a capital letter
 	 */ 
 	STR first_char_to_upper( STR_R str ) {
-			str[0] = toupper( str[0] );
-			std::for_each( str.begin() + 1, str.end(), detail::transform );
+		str[0] = toupper( str[0] );
+		std::for_each( str.begin() + 1, str.end(), detail::transform );
 			
-			return str;
+		return str;
 	}
 	
 	/*

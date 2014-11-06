@@ -68,7 +68,7 @@
  namespace libstrct {
 
 	 /*
-	 * Internal namespace for functions not to be called by the user
+	 * Internal namespace for functions not to be called by the user.
 	 */
  	namespace detail {
 	 
@@ -80,7 +80,7 @@
 	}
 
 	/*
-	 * Returns the original string, but with every word starting with a capital letter
+	 * Returns the original string, but with every word starting with a capital letter.
 	 */ 
 	STR first_char_to_upper( STR_R str ) {
 		str[0] = toupper( str[0] );
@@ -90,7 +90,7 @@
 	}
 	
 	/*
-	 * Returns the number of words found in the specified string
+	 * Returns the number of words found in the specified string.
 	 */
 	unsigned int word_frequency( CSTR_R str ) {
 		unsigned int count = 0;
@@ -104,7 +104,7 @@
 	}
 	
 	/*
-	 * Returns the longest word found in the specified string
+	 * Returns the longest word found in the specified string.
 	 */
 	STR longest_word( CSTR_R str ) {
 		STR builder = "", longest = "";
@@ -124,7 +124,7 @@
 	}
 	
 	/*
-	 * Returns true if the specified string is a Palindrome
+	 * Returns true if the specified string is a Palindrome.
 	 */
 	bool isPalindrome( STR_R str ) {
 		str.erase( std::remove_if( str.begin(), str.end(), ::isspace ), str.end() );
@@ -135,7 +135,7 @@
 	} 
 	
 	/*
-	 * Returns a string in the format of Hours:Minutes or Minutes:Seconds, your choice
+	 * Returns a string in the format of Hours:Minutes or Minutes:Seconds, your choice.
 	 */
 	STR time_to_string( const int &t ) {
 		std::stringstream time_ratio;
@@ -145,7 +145,7 @@
 	}
 	
 	/*
-	 * Returns a scrambled string
+	 * Returns a scrambled string.
 	 */
 	STR scramble( STR_R str ) {
 		std::seed_seq sd( str.begin(), str.end() );
@@ -161,7 +161,7 @@
 	}
 	
 	/*
-	 * Returns the whole specified string, reversed
+	 * Returns the whole specified string, reversed.
 	 */
 	STR reverse_all( STR_R str ) {
 		std::reverse( str.begin(), str.end() );
@@ -170,7 +170,7 @@
 	}
 
 	/*
-	 * Returns the portion of the string before the specified delimiter
+	 * Returns the portion of the string before the specified delimiter.
 	 */
 	STR slice_before( STR_R str, CSTR_R delimiter ) {
 		std::size_t pos = str.find( delimiter );
@@ -178,7 +178,7 @@
 	} 
 	
 	/*
-	 * Returns the portion of the string after the delimiter
+	 * Returns the portion of the string after the delimiter.
 	 */
 	STR slice_after( STR_R str, CSTR_R delimiter ) {
 		std::size_t pos = str.find( delimiter );
@@ -187,7 +187,7 @@
 	
 	/*
 	 * Returns a vector of strings from the specifies string, which has
-	 * been sliced at each position where the delimiter appears
+	 * been sliced at each position where the delimiter appears.
 	 */
 	std::vector<STR> distribute( STR_R str, CSTR_R delimiter ) {
 		std::vector<STR> slices;
@@ -199,6 +199,44 @@
 		}
 
 		return slices;
+	}
+	
+	/*
+	 * Returns a string that Spoonerism has been performed on.
+	 * A string is spoonerized by swapping the beginning of the first word in
+	 * the string with the beginning of the second word.
+	 * <param_name = "first_len"> : Represents the number of characters from
+	 * the first word to swap.
+	 * <param_name = "second_len"> : Represents the number of characters from
+	 * the second word to swap.
+	 * If the word frequency of the string, along with first_len and second_len
+	 * exceed 2, then the original string is returned.
+	 */
+	STR spoonerize( STR_R str, const int &first_len, const int &second_len ) {
+		if ( word_frequency( str ) > 2 ||
+			( ( first_len < 1 || first_len > 2 ) || 
+			( second_len < 1 || second_len > 2 ) ) ) 
+			return str;
+		
+		std::stringstream ss;
+		std::size_t space_pos = str.find( ' ' );
+
+		if ( first_len == 1 && second_len == 1 ) {
+			std::swap( str[0], str[( space_pos + 1 )] );
+			return str;
+		} else if ( first_len == 2 && second_len == 1 ) {
+			ss << str[( space_pos + 1 )] << str.substr( 2, ( space_pos - 1 ) ) <<
+				str.substr( 0, 2 ) << str.substr( ( space_pos + 2 ), ( str.size() - 1 ) );
+		} else if ( first_len == 1 && second_len == 2 ) {
+			ss << str.substr( ( space_pos + 1 ), 2 ) << str.substr( 1, space_pos ) <<
+				str[0] << str.substr( ( space_pos + 3 ), ( str.size() - 1 ) );
+		} else if ( first_len == 2 && second_len == 2 ) { 
+			ss << str.substr( ( space_pos + 1 ), 2 ) << str.substr( 2, space_pos - 1 ) <<
+				str.substr( 0, 2 ) << str.substr( ( space_pos + 3 ), ( str.size() - 1 ) );
+		}
+
+		str = ss.str();
+		return str;
 	}
 	
  }

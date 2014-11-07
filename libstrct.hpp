@@ -68,15 +68,26 @@
  namespace libstrct {
 
 	 /*
-	 * Internal namespace for functions not to be called by the user.
-	 */
+	  * Internal namespace for functions not to be called by the user.
+	  */
  	namespace detail {
 	 
+		/*
+		 * Changes character to uppercase if previous character is a space.
+		 */
 		void transform( char &c ) {
 			if ( ( * ( &c - sizeof( char ) ) ) == ' ' )
 				c = toupper( c );
 		}
-
+		
+		/*
+		 * Returns true if specified character is a vowel
+		 */
+		bool isVowel( const char &c ) {
+			return ( c == 'A' || c == 'a' || c == 'E' || c == 'e' || c == 'I' || c == 'i' ||
+				c == 'O' || c == 'o' || c == 'U' || c == 'u' );
+		}
+		
 	}
 
 	/*
@@ -100,6 +111,20 @@
 		while ( ss >> word )
 			++count;
 			
+		return count;
+	}
+	
+	/*
+	 * Returns the number of vowels in the specified string.
+	 */
+	unsigned int vowel_frequency( CSTR_R str ) {
+		unsigned int count = 0;
+		
+		for ( STR::iterator si = str.begin(); si != str.end(); ++si ) {
+			if ( detail::isVowel( *si ) )
+				++count;
+		}
+				
 		return count;
 	}
 	
@@ -186,7 +211,7 @@
 	}
 	
 	/*
-	 * Returns a vector of strings from the specifies string, which has
+	 * Returns a vector of strings from the specified string, which has
 	 * been sliced at each position where the delimiter appears.
 	 */
 	std::vector<STR> distribute( STR_R str, CSTR_R delimiter ) {

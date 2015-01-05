@@ -4,7 +4,7 @@
  *											 
  *********************************************
  *											 
- * VERSION : 1.0							 
+ * VERSION : 1.1							 
  * AUTHOR  : Rici Underwood					 
  * DATE    : 2014							 
  * LICENSE : GNU GPL v3						 
@@ -83,7 +83,7 @@
 		/*
 		 * Returns true if specified character is a vowel
 		 */
-		bool isVowel( const char &c ) {
+		bool isVowel( const char &c )  {
 			return ( c == 'A' || c == 'a' || c == 'E' || c == 'e' || c == 'I' || c == 'i' ||
 				c == 'O' || c == 'o' || c == 'U' || c == 'u' );
 		}
@@ -93,7 +93,7 @@
 	/*
 	 * Returns the original string, but with every word starting with a capital letter.
 	 */ 
-	STR first_char_to_upper( STR_R str ) {
+	STR first_char_to_upper( STR str ) {
 		str[0] = toupper( str[0] );
 		std::for_each( str.begin() + 1, str.end(), detail::transform );
 			
@@ -120,7 +120,7 @@
 	unsigned int vowel_frequency( CSTR_R str ) {
 		unsigned int count = 0;
 		
-		for ( STR::iterator si = str.begin(); si != str.end(); ++si ) {
+		for ( auto si = str.begin(); si != str.end(); ++si ) {
 			if ( detail::isVowel( *si ) )
 				++count;
 		}
@@ -151,7 +151,7 @@
 	/*
 	 * Returns true if the specified string is a Palindrome.
 	 */
-	bool isPalindrome( STR_R str ) {
+	bool isPalindrome( STR str ) {
 		str.erase( std::remove_if( str.begin(), str.end(), ::isspace ), str.end() );
 		STR copy = str;
 		std::reverse( copy.begin(), copy.end() );
@@ -172,7 +172,7 @@
 	/*
 	 * Returns a scrambled string.
 	 */
-	STR scramble( STR_R str ) {
+	STR scramble( STR str ) {
 		std::seed_seq sd( str.begin(), str.end() );
 		std::default_random_engine gen;
 
@@ -188,7 +188,7 @@
 	/*
 	 * Returns the whole specified string, reversed.
 	 */
-	STR reverse_all( STR_R str ) {
+	STR reverse_all( STR str ) {
 		std::reverse( str.begin(), str.end() );
 
 		return str;
@@ -197,7 +197,7 @@
 	/*
 	 * Returns the portion of the string before the specified delimiter.
 	 */
-	STR slice_before( STR_R str, CSTR_R delimiter ) {
+	STR slice_before( STR str, CSTR_R delimiter ) {
 		std::size_t pos = str.find( delimiter );
 		return str.substr( 0, pos );
 	} 
@@ -205,7 +205,7 @@
 	/*
 	 * Returns the portion of the string after the delimiter.
 	 */
-	STR slice_after( STR_R str, CSTR_R delimiter ) {
+	STR slice_after( STR str, CSTR_R delimiter ) {
 		std::size_t pos = str.find( delimiter );
 		return str.substr( ( pos + delimiter.size() ) );
 	}
@@ -214,7 +214,7 @@
 	 * Returns a vector of strings from the specified string, which has
 	 * been sliced at each position where the delimiter appears.
 	 */
-	std::vector<STR> distribute( STR_R str, CSTR_R delimiter ) {
+	std::vector<STR> distribute( STR str, CSTR_R delimiter ) {
 		std::vector<STR> slices;
 		std::size_t pos = 0;
 
@@ -237,7 +237,7 @@
 	 * If the word frequency of the string, along with first_len and second_len
 	 * exceed 2, then the original string is returned.
 	 */
-	STR spoonerize( STR_R str, const int &first_len, const int &second_len ) {
+	STR spoonerize( STR str, const int &first_len, const int &second_len ) {
 		if ( word_frequency( str ) > 2 ||
 			( ( first_len < 1 || first_len > 2 ) || 
 			( second_len < 1 || second_len > 2 ) ) ) 
